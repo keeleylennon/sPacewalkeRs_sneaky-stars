@@ -1,0 +1,116 @@
+---
+title: "Six Decades of Human Spaceflight: A Quantitative Analysis of Extravehicular Activity Conducted by NASA and Roscosmos"
+author:
+  - name: "Dr Elena Vasquez"
+    affiliation: "Department of Aerospace Science, University of Melbourne"
+  - name: "Dr Thomas Okafor"
+    affiliation: "Space Systems Research Group, University of Edinburgh"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+    fig-width: 6
+    fig-height: 3.5
+    embed-resources: true
+bibliography: references.bib
+---
+
+<style>
+body { max-width: 760px; margin: auto; font-size: 0.95em; line-height: 1.6; }
+.quarto-figure { margin: 1.8em auto; }
+table { font-size: 0.88em; }
+h2 { margin-top: 2em; }
+</style>
+
+## Abstract
+
+Extravehicular activity (EVA) — colloquially known as spacewalking — has been an essential component of human spaceflight since Alexei Leonov became the first person to venture outside a spacecraft in March 1965 [@nasa_eva]. Here we present a quantitative analysis of all recorded EVAs conducted by NASA and Roscosmos from 1965 to present, examining temporal trends in EVA frequency, cumulative programme milestones, duration distributions, and the contributions of individual crew members. Together, these data provide a comprehensive quantitative record of one of the most physically and technically demanding activities in human spaceflight.
+
+---
+
+## Introduction
+
+Since Leonov's pioneering 10-minute spacewalk during the Voskhod 2 mission, EVA has served as a cornerstone of space exploration — enabling satellite repair, station construction, and deployment of scientific instruments that could not be operated remotely [@nasa_eva]. The ability to work outside a spacecraft has proved indispensable at critical junctures: from the repair of the Hubble Space Telescope in 1993 to the ongoing maintenance of the International Space Station (ISS).
+
+The history of EVA reflects the broader arc of the Space Race and its aftermath. The American and Soviet programmes developed distinct EVA philosophies and operational cultures, and their records differ substantially in frequency, duration, and purpose. The American programme, driven initially by the requirements of the Apollo lunar landing missions, developed a tradition of complex, task-heavy EVAs that reached its operational peak during ISS assembly in the early 2000s. The Soviet and later Russian programme maintained a more consistent if lower-frequency cadence, with EVAs focused primarily on station maintenance and scientific equipment installation.
+
+Here we analyse the complete EVA record to quantify these patterns and place them in their historical context. Figures showing EVA frequency and cumulative counts were generated using R and ggplot2; figures showing duration-based analyses were generated using Python and matplotlib. All analyses are fully reproducible; the code underlying each figure is available in the repository.
+
+---
+
+## Methods
+
+### Data source and structure
+
+EVA records were obtained from NASA's publicly available spacewalk database [@nasa_eva]. The dataset contains one row per EVA, with fields recording the sequential EVA identifier, date, country of the crewing agency (USA or Russia), the names of crew members involved (semicolon-delimited), the vehicle or station from which the EVA was conducted, total duration in `H:MM` format, and a brief description of the EVA objective. The dataset spans from March 1965 to the present.
+
+### Data processing
+
+Duration values are recorded as character strings in `H:MM` format and were converted to decimal hours (Python) or total minutes (R) to enable quantitative comparison across EVAs. Records with missing or malformed duration entries were excluded from duration-based analyses but retained for frequency counts. The `crew` field stores semicolon-delimited astronaut names and was split and expanded so that each astronaut contributes one row to per-astronaut analyses.
+
+### Statistical analysis
+
+Frequency and cumulative count analyses were conducted in R (version 4.3) using dplyr [@dplyr] for data manipulation and ggplot2 [@ggplot2] for figure generation. Duration-based analyses were conducted in Python using pandas and matplotlib. No inferential statistics were applied; results are reported as counts, totals, and cumulative sums.
+
+### Data and code availability
+
+The raw EVA dataset is publicly available from NASA at <https://www.nasa.gov/international-space-station/spacewalks/>. All analysis code, the processed dataset, and the source Quarto document used to generate this report are available at **[repository URL — to be completed]** under a **[licence — to be completed]** licence. The repository is archived at Zenodo under **[DOI — to be completed]**.
+
+---
+
+## Results
+
+### EVA frequency over time
+
+Annual EVA frequency was low and irregular through the 1960s and early 1970s, consistent with the exploratory character of the Gemini, Apollo, and early Salyut programmes (@fig-evas-per-year). A step change in activity is apparent from the early 1980s as the Space Shuttle began flying. The most pronounced period of elevated activity falls between approximately 1998 and 2011, corresponding to the primary ISS assembly campaign.
+
+![Figure 1.](results/figures/fig_evas_per_year.png){#fig-evas-per-year}
+
+### Cumulative EVA programme growth
+
+The cumulative trajectory (@fig-cumulative-count) highlights the divergence between the two programmes over time. Both agencies accumulated EVA experience at broadly comparable rates through the late 1980s. The gradient of the American curve steepens sharply from the late 1990s, driven by the ISS assembly campaign. By the end of the record, the cumulative US total exceeds that of Russia by a factor of approximately three.
+
+![Cumulative EVA count over time by country. Lines represent the running total of spacewalks completed by each agency.](results/figures/fig_cumulative_count.png){#fig-cumulative-count}
+
+### Trends in EVA duration
+
+Spacewalk time has not remained constant across the six-decade record (@fig-duration-time). Early EVAs were short and exploratory, often constrained by suit technology and operational inexperience. Mean EVA duration increased markedly from the late 1980s as mission complexity grew, reaching a sustained plateau during the ISS assembly era. The two national programmes show divergent duration profiles throughout: American EVAs have consistently been longer on average, consistent with the more complex task profiles of Shuttle-era and ISS assembly sorties.
+
+![EVA duration over time by country. Points represent individual spacewalks; curves show LOESS smoothers for each agency.](results/figures/fig_duration_over_time.png){#fig-duration-over_time}
+
+### Distribution of EVA duration by country
+
+The distributional differences between the two programmes are shown clearly in @fig-duration-dist. The American distribution is broader and shifted toward longer durations, with a mode around five to six hours reflecting the standard Shuttle-era EVA profile. The Russian distribution is tighter and centred at a shorter mean duration, consistent with the maintenance-focused character of Roscosmos EVA operations. Both distributions show a lower tail of short EVAs representing early-programme sorties and emergency operations.
+
+![Distribution of EVA duration by country. Overlapping histograms show the frequency of EVAs in each duration bin for the USA (red) and Russia (green).](results/figures/fig_duration_distribution.png){#fig-duration-dist}
+
+### Cumulative EVA time
+
+The cumulative hours of extravehicular time across both programmes (@fig-cumulative-hours) reveals the accelerating pace of EVA operations from the mid-1990s. The curve is broadly linear through the early Shuttle era, then steepens sharply from approximately 1998 as ISS assembly required sustained periods of intensive extravehicular work. The total accumulated across the record represents a substantial human investment in off-vehicle operations.
+
+![Cumulative EVA time (hours) across both programmes combined.](results/figures/fig_cumulative_hours.png){#fig-cumulative-hours}
+
+### Astronaut EVA participation
+
+EVA experience is highly concentrated among a small cohort of astronauts (@fig-top-astronauts). The ten most prolific spacewalkers each accumulated more than forty hours of total spacewalk time, with the most experienced individual logging substantially more than the median across all participants. This concentration reflects the extent to which ISS assembly and maintenance work was carried out by a relatively small pool of specialist crew members, many of whom flew multiple long-duration missions to the station.
+
+![Top 10 astronauts by total EVA time (hours).](results/figures/fig_top_astronauts.png){#fig-top-astronauts}
+
+---
+
+## Discussion
+
+The EVA record assembled here spans nearly six decades of human spaceflight and documents a period of extraordinary change in the scale and operational character of both national programmes. EVA frequency is strongly structured by programme phase: the exploratory period of the 1960s gave way to routine operational use, which then drove to the unprecedented intensity of the ISS assembly campaign before moderating to a sustained maintenance cadence.
+
+The two national programmes differ substantially in operational character. The American programme has historically conducted EVAs of longer mean duration and greater technical complexity, visible in both the duration distribution and the scatter over time. The Russian programme has tended toward shorter, more frequent sorties focused on station maintenance. These differences are consistent with the distinct engineering cultures and mission architectures of the two agencies.
+
+Taken together, these results underscore the degree to which the modern EVA record is dominated by the ISS era. Future analyses should examine trends in EVA purpose across the historical record, and should incorporate data from emerging commercial operators as their EVA programmes mature.
+
+---
+
+## References
+
+::: {#refs}
+:::

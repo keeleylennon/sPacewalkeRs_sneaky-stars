@@ -1,0 +1,20 @@
+Package: SpacewalkAnalysis
+Title: Six Decades of Human Spaceflight: EVA Analysis
+Version: 1.0.0
+Authors@R: c(
+    person("Elena", "Vasquez", role = c("aut", "cre"),
+           email = "e.vasquez@unimelb.edu.au"),
+    person("Thomas", "Okafor", role = "aut",
+           email = "t.okafor@ed.ac.uk")
+  )
+Description: Reproducible analysis of NASA and Roscosmos extravehicular
+    activity records, 1965 to present.
+License: MIT
+Encoding: UTF-8
+Imports:
+    jsonlite,
+    dplyr,
+    ggplot2,
+    lubridate,
+    tidyr,
+    knitr

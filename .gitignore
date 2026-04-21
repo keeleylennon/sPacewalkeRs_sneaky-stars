@@ -1,0 +1,24 @@
+# Generated figures — recreated on every push
+results/figures/
+
+# Rendered manuscript output
+manuscript.html
+manuscript_files/
+
+# R environment files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rprofile
+.Rbuildignore
+renv/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+.vscode/settings.json
