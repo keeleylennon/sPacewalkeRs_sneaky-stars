@@ -22,7 +22,7 @@ parse_duration <- function(d) {
   as.integer(parts[1]) * 60L + as.integer(parts[2])
 }
 
-# df$duration_mins <- sapply(df$duration, parse_duration)
+df$duration_mins <- sapply(df$duration, parse_duration)
 
 colour_map <- c("USA" = "#e41a1c", "Russia" = "#4daf4a")
 
@@ -68,12 +68,10 @@ ggsave("results/figures/fig_cumulative_count.png", plot = p2,
 # --------------------------------------------------
 
 df_scatter <- df |>
-  filter(!is.na(date), !is.na(duration), duration != "") |>
-  rowwise() |>
-  mutate(dur_parts = list(strsplit(duration, ":")[[1]]),
-         duration_hrs = as.numeric(dur_parts[1]) + as.numeric(dur_parts[2]) / 60) |>
-  ungroup() |>
-  filter(!is.na(duration_hrs), country %in% c("USA", "Russia"))
+  filter(!is.na(date),
+         !is.na(duration_mins),
+         country %in% c("USA", "Russia")) |>
+  mutate(duration_hrs = duration_mins / 60)
 
 p3 <- ggplot(df_scatter, aes(x = date, y = duration_hrs, colour = country)) +
   geom_point(alpha = 0.4, size = 1.2) +
