@@ -1,0 +1,22 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: sPacewalkeRs_sneaky-stars
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Keeley
+    family-names: Lennon
+    email: kl550@uowmail.edu.au
+    affiliation: University of Wollongong
+identifiers:
+  - type: doi
+    value: 10.5072/zenodo.491786
+    description: 'Repo, v1.0.0'
+repository-code: 'https://github.com/keeleylennon/sPacewalkeRs_sneaky-stars'
+license: AGPL-3.0-or-later
+version: v1.0.0
+date-released: '2026-04-22'
