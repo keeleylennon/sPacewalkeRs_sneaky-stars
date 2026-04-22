@@ -1,4 +1,6 @@
 [![DOI](https://sandbox.zenodo.org/badge/1217588161.svg)](https://handle.test.datacite.org/10.5072/zenodo.491785)
+![Static Badge](https://img.shields.io/badge/Licence-red)
+
 
 # NASA Spacewalk Analysis — Reproducible Manuscript
 
