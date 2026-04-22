@@ -38,7 +38,8 @@ evas_per_year <- df |>
 p1 <- ggplot(evas_per_year, aes(x = year, y = n, fill = country)) +
   geom_col(position = "stack", alpha = 0.85) +
   scale_fill_manual(values = colour_map) +
-  theme_minimal(base_size = 10)
+  theme_minimal(base_size = 10)+
+  labs(x="year",y="count")
 
 ggsave("results/figures/fig_evas_per_year.png", plot = p1,
        width = 8, height = 4, dpi = 150)
@@ -58,7 +59,8 @@ cum_data <- df |>
 p2 <- ggplot(cum_data, aes(x = date, y = cum_evas, colour = country)) +
   geom_line(linewidth = 1) +
   scale_colour_manual(values = colour_map) +
-  theme_minimal(base_size = 10)
+  theme_minimal(base_size = 10)+
+  labs(x="year",y="cumulative EVA (count)")
 
 ggsave("results/figures/fig_cumulative_count.png", plot = p2,
        width = 8, height = 4, dpi = 150)
@@ -77,7 +79,8 @@ p3 <- ggplot(df_scatter, aes(x = date, y = duration_hrs, colour = country)) +
   geom_point(alpha = 0.4, size = 1.2) +
   geom_smooth(method = "loess", se = FALSE, linewidth = 1) +
   scale_colour_manual(values = colour_map) +
-  theme_minimal(base_size = 10)
+  theme_minimal(base_size = 10)+
+  labs(x="year",y="EVA duration (hours)")
 
 ggsave("results/figures/fig_duration_over_time.png", plot = p3,
        width = 8, height = 4, dpi = 150)
